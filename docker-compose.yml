@@ -1,0 +1,32 @@
+services:
+  hindsight-api:
+    image: ghcr.io/vectorize-io/hindsight:latest
+    container_name: hindsight-api
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+      - "9999:9999"
+    environment:
+      HINDSIGHT_API_LLM_PROVIDER: groq
+      HINDSIGHT_API_LLM_API_KEY: ${GROQ_API_KEY}
+      HINDSIGHT_API_LLM_MODEL: llama-3.3-70b-versatile
+      HINDSIGHT_API_RETAIN_MAX_COMPLETION_TOKENS: 32000
+    volumes:
+      - hindsight_pg0:/home/hindsight/.pg0
+
+  teammind-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: teammind-app
+    restart: unless-stopped
+    depends_on:
+      - hindsight-api
+    ports:
+      - "8501:8501"
+    environment:
+      HINDSIGHT_API_URL: http://hindsight-api:8888
+      TEAMMIND_BANK_ID: ${TEAMMIND_BANK_ID:-teammind-ai-project}
+
+volumes:
+  hindsight_pg0:
