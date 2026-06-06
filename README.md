@@ -1,6 +1,6 @@
 # TeamMind AI
 
-TeamMind AI is a hackathon-ready web app that acts like an AI group project manager for small teams. It captures team roles, skills, task updates, meeting decisions, blockers, and delivery history, then uses project memory to make better task assignment and reminder suggestions over time.
+TeamMind AI is a web app that acts like an AI group project manager for small teams. It captures team roles, skills, task updates, meeting decisions, blockers, and delivery history, then uses project memory to make better task assignment and reminder suggestions over time.
 
 The app is intentionally simple:
 
